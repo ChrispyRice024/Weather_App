@@ -1,7 +1,6 @@
 import react from 'react'
 
 export default function Fivecast (props) {
-    console.log('weather fivecast', props)
     // const weather = props.weather.data.timelines[0].intervals[0].values.temperature
     // const weather = [
     //     one,
@@ -13,15 +12,13 @@ export default function Fivecast (props) {
     //     seven,
     // ]
 
-
-    const generateDays = (weather) => {
-        return weather.map(weather => <div>{weather.data}</div>)
-    }
+    const weather2 = props.weather2
 
     return(
         <div id='fivecast'>
             <h1>FiveCast</h1>
-        {/* {generateDays(weather)} */}
+        {/* {generateDays(weather2)} */}
+        {console.log('weather2', weather2)}
         </div>
     )
 }

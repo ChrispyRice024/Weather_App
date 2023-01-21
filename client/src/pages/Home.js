@@ -4,12 +4,12 @@ import Fivecast from '../components/Fivecast'
 
 // snellville lat/lon for testing  33.857328,-84.0199108
 
-
+// weather[0].data.timelines[0].intervals[0].values.temperature
 
 export default function Home () {
     const [details, setDetails] = useState({ city: "", state: "" });
     const weather = [];
-    
+    const [weather2, setWeather2] = useState([])
     const fetchFunction = async (event) => {
         event.preventDefault();
 
@@ -24,11 +24,12 @@ export default function Home () {
                 // `https://api.tomorrow.io/v4/timelines?location=${response.results[0].lat},${response.results[0].lon}&fields=temperature&timesteps&humidity&windSpeed&precipitationIntensity&precipitation&rainIntensityvisibility&cloudCover&uvIndex&weatherCode=1h&units=metric&apikey=OkVwrGemAXddKs3T0ruKtK4mPeYEemYy`
             )).json()
             weather.push(weatherRes)
+            setWeather2(weather[0].data.timelines[0].intervals)
         } catch (error) {
-            console.log('eerr', error);
+            console.log('Error', error);
         }
-        console.log('from function', weather)
-        localStorage.setItem('weather', weather)
+        console.log('from function', weather, weather2)
+        localStorage.setItem('weather', weather && weather2)
         return weather
     };
     console.log('2nd weather', weather)
@@ -72,7 +73,7 @@ export default function Home () {
                 </p>
             </form>
             <div>
-                <Today weather={weather}/>
+                <Today weather={weather} weather2={weather2}/>
                 <Fivecast weather={weather}/>
             </div>
         </div>
